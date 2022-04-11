@@ -1,0 +1,8 @@
+body {
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+  background-color: #f5e2e2;
+  min-height: 100vh;
+  display: flex;
+  position: relative;
+}
