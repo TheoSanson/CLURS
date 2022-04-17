@@ -1,0 +1,83 @@
+#login-body {
+    height: 200px;
+    background-color: rgb(97, 146, 100); /* For browsers that do not support gradients */
+    background-image: linear-gradient(to top right, rgb(8, 20, 9), rgb(32, 163, 5));
+  }
+
+.banner{
+    width:80%;
+    color:white;
+    font-size:30px;
+    margin:auto;
+    margin-top:100px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-box {
+    position: relative;
+    margin:auto;
+    width: 400px;
+    padding: 40px;
+    background: rgb(255, 255, 255);
+    box-sizing: border-box;
+    box-shadow: 0 15px 25px rgba(0,0,0,.6);
+    border-radius: 10px;
+  }
+  
+  .login-box h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: rgb(0, 0, 0);
+    text-align: center;
+  }
+  
+  .login-box .user-box {
+    position: relative;
+  }
+  
+  .login-box .user-box input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid rgb(0, 0, 0);
+    outline: none;
+    background: transparent;
+  }
+  .login-box .user-box label {
+    position: absolute;
+    top:0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+    pointer-events: none;
+    transition: .5s;
+  }
+  
+  .login-box .user-box input:focus ~ label,
+  .login-box .user-box input:valid ~ label {
+    top: -20px;
+    left: 0;
+    color: #000000;
+    font-size: 12px;
+  }
+
+  #register-btn{
+    font-style:none;
+    margin-top:10px;
+    color:rgb(66, 66, 66);
+  }
+
+  #register-btn:hover{
+    color:black;
+  }
+
+  #noPass{
+      font-size:15px;
+      color:red;
+  }

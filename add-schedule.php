@@ -1,4 +1,4 @@
-<?php # include "static/function/authenticate.php"; ?>
+<?php include "static/function/authenticate.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
