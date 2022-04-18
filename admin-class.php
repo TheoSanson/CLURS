@@ -106,11 +106,11 @@
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Time Start</div>
-                        <input type='time' name='time_start' class='col-md-10 offset-md-1' style='padding-left:0px;'>
+                        <input type='time' name='time_start' class='col-md-10 offset-md-1' style='padding-left:0px;' step='1800'>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Time End</div>
-                        <input type='time' name='time_end' class='col-md-10 offset-md-1' style='padding-left:0px;'>
+                        <input type='time' name='time_end' class='col-md-10 offset-md-1' style='padding-left:0px;' step='1800'>
                     </div>
                     <div class="row">
                         <div class="col-md-10 offset-md-1 p-0">

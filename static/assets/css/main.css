@@ -39,6 +39,7 @@ body {
   overflow:hidden; /* Set to auto */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   scrollbar-width: none;  /* Firefox */
+  z-index: 5;
 }
 
 .page-modal::-webkit-scrollbar { 
