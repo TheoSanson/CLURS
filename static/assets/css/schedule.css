@@ -23,6 +23,7 @@
 #schedule-table th {
     font-weight: normal;
     border-top: thin dotted #ccc;
+    width: 110px;
 }
 
 #schedule-table td {
