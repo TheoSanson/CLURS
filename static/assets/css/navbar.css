@@ -18,9 +18,9 @@ ul {
 }
 
 :root {
-  --main-color: #4e0404;
-  --main-color-dark: #220101;
-  --main-color-light: #630000;
+  --main-color: #00441a;
+  --main-color-dark: #01220c;
+  --main-color-light: #005713;
   --text-color: #f0f0f0;
 }
 
@@ -32,13 +32,29 @@ ul {
   list-style: none;
 }
 
+.wrapper{
+  position: fixed;
+  height: 100%;
+  width:18rem;
+  min-width:18rem;
+  overflow-y:auto;
+  transition: width 0.5s ease-in-out,min-width 0.5s ease-in-out;
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.wrapper::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
+
+
 nav {
-  position: sticky;
+  position:relative;
   top: 0;
   left: 0;
-  height: 100vh;
   background-color: var(--main-color);
   width: 16rem;
+  min-height:100%;
   padding: 1.8rem 0.85rem;
   color: #fff;
   display: flex;
@@ -46,7 +62,6 @@ nav {
   transition: width 0.5s ease-in-out;
   z-index: 1000;
 }
-
 nav::before {
   content: "";
   position: absolute;
@@ -355,6 +370,11 @@ nav:hover .shrink-btn,
 
 .hide {
   transition: opacity 0.3s 0.2s;
+}
+
+body.shrink .wrapper{
+  width: 13rem;
+  min-width: 13rem;
 }
 
 body.shrink nav {
