@@ -1,7 +1,7 @@
 <?php
     include "database.php";
     $lab_id = $_POST['lab_id'];
-    $computers = mysqli_query($link,"SELECT * FROM computer WHERE lab=$lab_id");
+    $computers = mysqli_query($link,"SELECT * FROM computer WHERE lab=$lab_id AND status='Available'");
     echo "<select name='computer' id='computer' class='col-md-12'>";
     echo "<option value=''>-----</option>";
     while($computer=mysqli_fetch_array($computers)):

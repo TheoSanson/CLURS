@@ -76,7 +76,16 @@
                                 <?php echo $lab['total_seats']; ?>
                             </td>
                             <td style='width:30%;'>
-                                Status
+                            <?php 
+                                $status = '';
+                                $time = date('H:i:s');
+                                if($lab['time_open'] < $time || $lab['time_close'] > $time){
+                                    echo 'Closed';
+                                }
+                                else{
+                                    echo 'Open';
+                                } 
+                            ?>
                             </td>
                             <td style='width:35%; position:relative !important;'>
                                 <?php echo $lab['remarks']; ?>
@@ -98,19 +107,19 @@
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Lab Room Name</div>
-                        <input type='text' name='labname' class='col-md-10 offset-md-1'>
+                        <input type='text' name='labname' class='col-md-10 offset-md-1 p-1'>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Time Opened</div>
-                        <input type='time' name='time_open' class='col-md-10 offset-md-1'>
+                        <input type='time' name='time_open' class='col-md-10 offset-md-1 p-1'>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Time Closed</div>
-                        <input type='time' name='time_close' class='col-md-10 offset-md-1'>
+                        <input type='time' name='time_close' class='col-md-10 offset-md-1 p-1'>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Initial No. of PCs</div>
-                        <input type='number' name='pc-qty' class='col-md-10 offset-md-1'>
+                        <input type='number' name='pc-qty' class='col-md-10 offset-md-1 p-1'>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0' style='display:flex; margin-top:20px;'><button type='button' class='btn btn-secondary close-modal' style='flex:0.8;'>Cancel</button><input type='submit' class='btn btn-primary' style='margin-left:20px;flex:1;' value='Add'></div>

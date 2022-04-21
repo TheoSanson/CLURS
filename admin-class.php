@@ -27,9 +27,15 @@
                         }
                     ?>
                 </h4>
+                <h5>
+                    <?php 
+                        echo date('h:i a',strtotime($lab['time_open']))." - ".date('h:i a',strtotime($lab['time_close']));
+                    ?>
+                </h5>
                 <hr>
                 <div class='add-btn-container'>
                     <button class='btn btn-success open-modal'>Add New Class Schedule</button>
+                    <button class='btn btn-primary open-modal-2'>Edit Laboratory Opening/Closing Times</button>
                     <button class='btn btn-secondary' id='manage-session-btn' name='<?php echo $lab_id; ?>'>Manage Computers</button>
                 </div>
                 <table id='lab-table' class='table table-striped table-hover' style='width:100%; margin-top:30px !important;'>
@@ -38,19 +44,22 @@
                             <td class='hidden' style='width:10%;'>
                                 id
                             </td>
-                            <td style='width:40%;'>
+                            <td style='width:35%;'>
                                 Schedule Description
                             </td>
-                            <td style='width:20%;'>
+                            <td style='width:15%;'>
                                 Time Start
                             </td>
-                            <td style='width:20%;'>
+                            <td style='width:15%;'>
                                 Time End
                             </td>
-                            <td style='width:10%;'>
+                            <td style='width:15%;'>
                                 Date
                             </td>
-                            <td style='width:10%;'>
+                            <td style='width:15%;'>
+                                End Date
+                            </td>
+                            <td style='width:15%;'>
                                 Duration
                             </td>
                         </tr>
@@ -61,24 +70,40 @@
                             if ($sessions->num_rows > 0) {
                                 while($session=mysqli_fetch_array($sessions)):
                         ?>
-                        <tr class='datatable-row' name='<?php echo $session['id']; ?>'>
+                        <tr name='<?php echo $session['id']; ?>'>
                             <td class='hidden' style='width:10%;'>
                                 id
                             </td>
-                            <td style='width:40%;'>
+                            <td style='width:35%;' id='td-desc-<?php echo $session['id']; ?>'>
                                 <?php echo $session['description']; ?>
                             </td>
-                            <td style='width:20%;'>
-                                <?php echo $session['time_start']; ?>
+                            <td style='width:15%;' id='<?php echo $session['id'] ?>-time_start' name='<?php echo $time_start = date('h:i a',strtotime($session['time_start'])); ?>'>
+                                <?php echo $time_start; ?>
                             </td>
-                            <td style='width:20%;'>
-                                <?php echo $session['time_end']; ?>
+                            <td style='width:15%;' id='<?php echo $session['id'] ?>-time_end' name='<?php echo $time_end = date('h:i a',strtotime($session['time_end'])); ?>'>
+                                <?php echo $time_end; ?>
                             </td>
-                            <td style='width:10%;'>
+                            <td style='width:15%;'>
                                 <?php echo $session['date']; ?>
                             </td>
-                            <td style='width:20%;'>
+                            <td style='width:15%;'>
+                                <?php 
+                                    $r_sessions = mysqli_query($link,"SELECT * FROM class_session WHERE repeat_id=".$session['id']." ORDER BY date DESC");
+                                    if ($r_sessions->num_rows > 0) {
+                                        while($r_session=mysqli_fetch_array($r_sessions)):
+                                            echo $r_session['date'];
+                                            break;
+                                        endwhile;
+                                    }
+                                ?>
+                            </td>
+                            <td style='width:15%; position:relative;' id='td-duration-<?php echo $session['id']; ?>'>
                                 <?php echo $session['duration']; ?>
+                                <div class='row-btn-containers' style='align-items:center; position:absolute; right:0px;'>
+                                    <button class='btn btn-primary row-edit-btn open-edit-modal' name='<?php echo $session['id']; ?>' style='margin-right:2px'><i class='bx bx-clipboard'></i></button>
+                                    <button class='btn btn-danger row-edit-btn open-delete-modal' name='<?php echo $session['id']; ?>'><i class='bx bx-trash-alt'></i></button>
+                                </div>
+                            </td>
                             </td>
                         </tr>
                         <?php
@@ -89,7 +114,7 @@
                 </table>
             </div>
         </div>
-        <div class="page-modal">
+        <div class="page-modal" id='0'>
             <div class="page-modal-container" style='width:500px; height:660px;'>
                 <form class='modal-form container' method="post" action="static/function/insert_class_session.php">
                     <input type='hidden' name='lab_id' value='<?php echo $lab_id; ?>'>
@@ -98,19 +123,19 @@
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Session Description</div>
-                        <input type='text' name='session_desc' class='col-md-10 offset-md-1' style='padding-left:0px;'>
+                        <input type='text' name='session_desc' class='col-md-10 offset-md-1 p-1'>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Date</div>
-                        <input type='date' name='date' class='col-md-10 offset-md-1' style='padding-left:0px;'>
+                        <input type='date' name='date' class='col-md-10 offset-md-1 p-1'>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Time Start</div>
-                        <input type='time' name='time_start' class='col-md-10 offset-md-1' style='padding-left:0px;' step='1800'>
+                        <input type='time' name='time_start' class='col-md-10 offset-md-1 p-1' step='1800'>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Time End</div>
-                        <input type='time' name='time_end' class='col-md-10 offset-md-1' style='padding-left:0px;' step='1800'>
+                        <input type='time' name='time_end' class='col-md-10 offset-md-1 p-1' step='1800'>
                     </div>
                     <div class="row">
                         <div class="col-md-10 offset-md-1 p-0">
@@ -135,16 +160,140 @@
                 </form>
             </div>
         </div>
+        <div class="page-modal" id='1'>
+            <div class="page-modal-container" style='width:500px; height:auto;'>
+                <form class='modal-form container' method="post" action="static/function/update_lab_times.php">
+                    <input type='hidden' name='lab_id' value='<?php echo $lab_id; ?>'>
+                    <div class="row">
+                        <h3>Set Open and Close Times</h3>
+                    </div>
+                    <div class="row">
+                        <div class='col-md-10 offset-md-1 p-0'>Time Start</div>
+                        <input type='time' name='time_open' class='col-md-10 offset-md-1 p-1' step='1800' value='<?php echo $lab['time_open']; ?>'>
+                    </div>
+                    <div class="row">
+                        <div class='col-md-10 offset-md-1 p-0'>Time End</div>
+                        <input type='time' name='time_close' class='col-md-10 offset-md-1 p-1' step='1800' value='<?php echo $lab['time_close']; ?>'>
+                    </div>
+                    <div class="row">
+                        <div class='col-md-10 offset-md-1 p-0' style='display:flex; margin-top:20px;'>
+                        <button type='button' class='btn btn-secondary close-modal-2' style='flex:0.8;'>Cancel</button><input type='submit' class='btn btn-primary' style='margin-left:20px;flex:1;' value='Edit Time'></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="page-modal" id='2'>
+            <div class="page-modal-container" style='width:500px; height:auto;'>
+                <form class='modal-form container' method="post" action="static/function/update_class_session.php">
+                    <input type='hidden' id='session_id' name='session_id' value=''>
+                    <input type='hidden' name='lab_id' value='<?php echo $lab_id; ?>'>
+                    <div class="row">
+                        <h3>Set Session Time</h3>
+                    </div>
+                    <div class="row">
+                        <div class='col-md-10 offset-md-1 p-0'>Time Start</div>
+                        <input type='time' id='edit-time_start' name='time_start' class='col-md-10 offset-md-1 p-1' step='1800' value=''>
+                    </div>
+                    <div class="row">
+                        <div class='col-md-10 offset-md-1 p-0'>Time End</div>
+                        <input type='time' id='edit-time_end' name='time_end' class='col-md-10 offset-md-1 p-1' step='1800' value=''>
+                    </div>
+                    <div class="row">
+                        <div class='col-md-10 offset-md-1 p-0' style='display:flex; margin-top:20px;'>
+                        <button type='button' class='btn btn-secondary close-edit-modal' style='flex:0.8;'>Cancel</button><input type='submit' class='btn btn-primary' style='margin-left:20px;flex:1;' value='Edit Time'></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="page-modal" id='3'>
+            <div id="page-modal-container" class="page-modal-container" style='width:500px; height:auto; margin-bottom:80px; margin-top:40px; display:flex; align-items:center;'>
+                <form class='modal-form container' method="post" action="static/function/delete_class_session.php" style='flex:60%;'>
+                    <input type='hidden' name='lab_id' value='<?php echo $lab_id; ?>'>
+                    <input type='hidden' id='delete-session-id' name='session-id' value=''>
+                    <div class="row" style='margin-bottom:10px;'>
+                        <h3 style='color:red;'>This will Delete the session!</h3>
+                        <h4>Are you sure?</h4>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <h5 class='col-md-10 offset-md-1 p-0'>Description</h5>
+                        <h6 class='col-md-10 offset-md-1 p-0' id='delete-desc'></h6>
+                    </div>
+                    <div class="row">
+                        <h5 class='col-md-10 offset-md-1 p-0'>Time Start</h5>
+                        <h6 class='col-md-10 offset-md-1 p-0' id='delete-start'></h6>
+                    </div>
+                    <div class="row">
+                        <h5 class='col-md-10 offset-md-1 p-0'>Time End</h5>
+                        <h6 class='col-md-10 offset-md-1 p-0' id='delete-end'></h6>
+                    </div>
+                    <div class="row">
+                        <h5 class='col-md-10 offset-md-1 p-0'>Duration</h5>
+                        <h6 class='col-md-10 offset-md-1 p-0' id='delete-duration'></h6>
+                    </div>
+                    <div class="row">
+                        <div class='col-md-10 offset-md-1 p-0' style='display:flex; margin-top:20px;'>
+                        <button type='button' class='btn btn-secondary close-delete-modal' style='flex:0.8;'>Cancel</button><input type='submit' class='btn btn-danger' style='margin-left:20px;flex:1;' value='Delete'></div>
+                    </div>
+                </form>
+            </div>
+        </div>
         <?php 
             include "static/include/scripts.php";
             include "static/include/table-scripts.php";
         ?>
         <script src="static/assets/js/modal.js"></script>
         <script>
+            $(document).on('click', '.open-modal-2', function() {
+                openModal(1);
+                return 0;
+            });
+
+            $(document).on('click', '.close-modal-2', function() {
+                closeModal(1);
+                return 0;
+            });
+            
+            $(document).on('click', '.open-edit-modal', function() {
+                var session_id = $(this).attr('name');
+                document.getElementById('session_id').value = session_id;
+                document.getElementById('edit-time_start').value = $('#'+session_id+'-time_start').attr('name');
+                document.getElementById('edit-time_end').value = $('#'+session_id+'-time_end').attr('name');
+                openModal(2);
+                return 0;
+            });
+
+            $(document).on('click', '.close-edit-modal', function() {
+                closeModal(2);
+                return 0;
+            });
+            
+            $(document).on('click', '.open-delete-modal', function() {
+                var session_id = $(this).attr('name');
+                document.getElementById('delete-session-id').value = session_id;
+                document.getElementById('delete-desc').innerText = document.getElementById('td-desc-'+$(this).attr('name')).innerText;
+                document.getElementById('delete-start').innerText = $('#'+session_id+'-time_start').attr('name');
+                document.getElementById('delete-end').innerText = $('#'+session_id+'-time_end').attr('name');
+                var duration = parseInt(document.getElementById('td-duration-'+$(this).attr('name')).innerText)/60;
+                var duration_text = ' Hours';
+                if(duration==1){
+                    duration_text = ' Hour';
+                }
+                document.getElementById('delete-duration').innerText = duration + duration_text;
+                openModal(3);
+                return 0;
+            });
+            
+            $(document).on('click', '.close-delete-modal', function() {
+                closeModal(3);
+                return 0;
+            });
+
             $(document).on('click', '#manage-session-btn', function() {
                 var id = $(this).attr('name');
                 window.location.href = "admin-lab-view.php?id="+id;
             });
+            
             function handleClick(cb) {
                 if(cb.checked){
                     document.getElementById('occurrence').disabled = false;

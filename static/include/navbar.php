@@ -13,9 +13,21 @@
         </div>
         <div class="sidebar-links">
             <ul>
+            <?php
+                $activeIndex = 0;  
+                if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')   
+                    $url = "https://";   
+                else  
+                    $url = "http://";   
+                // Append the host(domain name, ip) to the URL.   
+                $url.= $_SERVER['HTTP_HOST'];   
+                
+                // Append the requested resource location to the URL   
+                $url.= $_SERVER['REQUEST_URI'];
+            ?>   
             <div class="active-tab"></div>
             <li class="tooltip-element" data-tooltip="0">
-                <a href="#" class="active" data-active="0">
+                <a href="#" <?php if(strpos($url, 'admin-dashboard.php')) { echo "class='active'"; $activeIndex = 0; }?> data-active="0">
                 <div class="icon">
                     <i class="bx bx-tachometer"></i>
                     <i class="bx bxs-tachometer"></i>
@@ -24,21 +36,21 @@
                 </a>
             </li>
             <li class="tooltip-element" data-tooltip="1">
-                <a href="#" data-active="1">
+                <a href="/CLURS/admin-lab.php" <?php if(strpos($url, 'admin-lab') || strpos($url, 'admin-class.php')) { echo "class='active'"; $activeIndex = 1; }?> data-active="1">
                 <div class="icon">
                     <i class="bx bx-folder"></i>
                     <i class="bx bxs-folder"></i>
                 </div>
-                <span class="link hide">Projects</span>
+                <span class="link hide">Lab Management</span>
                 </a>
             </li>
             <li class="tooltip-element" data-tooltip="2">
-                <a href="#" data-active="2">
+                <a href="/CLURS/admin-staff.php" <?php if(strpos($url, 'admin-staff.php')) { echo "class='active'"; $activeIndex = 2; }?> data-active="2">
                 <div class="icon">
                     <i class="bx bx-message-square-detail"></i>
                     <i class="bx bxs-message-square-detail"></i>
                 </div>
-                <span class="link hide">Messages</span>
+                <span class="link hide">Admin User Mgmt.</span>
                 </a>
             </li>
             <li class="tooltip-element" data-tooltip="3">
@@ -62,8 +74,8 @@
             <div class="tooltip">
                 <!-- Specify Any Additional Tooltips! -->
                 <span class="show">Dashboard</span>
-                <span>Projects</span>
-                <span>Messages</span>
+                <span>Lab Mgmt.</span>
+                <span>Admin Mgmt</span>
                 <span>Analytics</span>
                 <span>Last Analytics</span>
             </div>
@@ -127,5 +139,6 @@
         </div>
     </nav>
 </div>
+<input type="hidden" id='activeIndex' value='<?php echo $activeIndex;?>'>
 <div class="wrapper" style='position:sticky;'>
 </div>

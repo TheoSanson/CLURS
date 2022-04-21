@@ -20,7 +20,7 @@
             $class_session_id = $link->insert_id;
             $newDate = strtotime($date);
             $endDate = strtotime($repeat_end);
-            $repeat_desc = $desc.' REPEATING';
+            $repeat_desc = $desc.' (r)';
             if($frequency=='weekly'){
                 while (strtotime("+7 days", $newDate) <= $endDate){
                     $newDate = strtotime("+7 days", $newDate);
@@ -41,9 +41,9 @@
                 }
             }
         }
-        #echo "	<script type='text/javascript'>
-        #   window.location='/clurs/admin-class.php?id=$lab';
-        #</script>";
+        echo "	<script type='text/javascript'>
+           window.location='/clurs/admin-class.php?id=$lab';
+        </script>";
     }
 	else
 	{
