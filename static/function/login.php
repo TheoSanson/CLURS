@@ -11,7 +11,7 @@
         $count = mysqli_num_rows($result);
         if($count == 0){
             echo "	<script type='text/javascript'>
-                        alert('No Record of Given Username');
+                        alert('Incorrect Credentials');
                         window.location='/clurs/login.php';
                     </script>";
         }	
@@ -24,9 +24,17 @@
             $_SESSION['pass'] = $password;
             $_SESSION['firstname'] = $user['firstname'];
             $_SESSION['lastname'] = $user['lastname'];
-            echo "	<script type='text/javascript'>
-                        window.location='/clurs/index.php';
-                    </script>";
+            $_SESSION['access_level'] = $user['access_level'];
+            if($user['access_level'] == 0){
+                echo "	<script type='text/javascript'>
+                           window.location='/clurs/student-reservation.php';
+                        </script>";
+            }
+            else{
+                echo "	<script type='text/javascript'>
+                           window.location='/clurs/admin-dashboard.php';
+                        </script>";
+            }
         }
     } elseif (isset($_SESSION['user'])){
         $username = $_SESSION['user'];
@@ -50,8 +58,9 @@
 			$_SESSION["schoolid"] = $user['school_id'];
             $_SESSION['firstname'] = $user['firstname'];
             $_SESSION['lastname'] = $user['lastname'];
+            $_SESSION['access_level'] = $user['access_level'];
             echo "	<script type='text/javascript'>
-                       window.location='/clurs/index.php';
+                        window.location='/clurs/student-reservation.php';
                     </script>";
         }
     }

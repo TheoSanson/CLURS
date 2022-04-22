@@ -5,7 +5,12 @@ const active_tab = document.querySelector(".active-tab");
 const shortcuts = document.querySelector(".sidebar-links h4");
 const tooltip_elements = document.querySelectorAll(".tooltip-element");
 
-let activeIndex;
+let activeIndex = document.getElementById('activeIndex').value;
+moveActiveTab();
+setTimeout(() => {
+  console.log('Opacity 1!');
+  active_tab.style.opacity = '1';
+},1000)
 
 shrink_btn.addEventListener("click", () => {
   document.body.classList.toggle("shrink");

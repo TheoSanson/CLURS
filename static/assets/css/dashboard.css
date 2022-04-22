@@ -1,0 +1,30 @@
+.dashboard-module{
+    background-color:white;
+    border-radius:3px;
+    box-shadow: 0 3px 5px rgb(0 0 0 / 0.2);
+    padding:11px;
+    position:relative;
+}
+
+.dashboard-module-sm{
+    height:120px;
+}
+
+.dashboard-module-md{
+    height:200px;
+}
+.dashboard-module-lg{
+    height:300px;
+}
+
+.dashboard-label{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.dashboard-value{
+    position:absolute;
+    font-size:26px;
+    right: 30px;
+    bottom: 15px;
+}

@@ -7,6 +7,7 @@
     $time_end = $_POST['time_end'];
     $timeIntervalArray = [];
     $timeBoole = date('h:i a',strtotime($time_start));
+
     
     while(date('H:i:s',strtotime($timeBoole)) <= $time_end){
         $timeIntervalArray[] = $timeBoole;
@@ -18,7 +19,24 @@
     $session_td = array_fill(0, count($timeIntervalArray), '');
     $session_duration = array_fill(0, count($timeIntervalArray), 0);
 
-    $sessions = mysqli_query($link,"SELECT * FROM session WHERE computer=$computer_id AND date='$date'");
+    #For Editing Sessions
+    $session_condition = '';
+    $edit_id_prefix = '';
+    if(isset($_POST['session_id'])){
+        $session_id = $_POST['session_id'];
+        $session_condition = " AND id <> $session_id";
+        $edit_id_prefix = 'edit-';
+        $sessions = mysqli_query($link,"SELECT * FROM session WHERE computer=$computer_id AND date='$date' AND id = $session_id");
+        $session=mysqli_fetch_array($sessions);
+        if(isset($session)){
+            $key = array_search(date('h:i a',strtotime($session['time_start'])), $timeIntervalArray);
+            $duration = $session['duration']/30;
+            $session_td[$key] = "<td colspan='4' rowspan='$duration' class='stage-venus'>Current Session</td>";
+        }
+    
+    }
+
+    $sessions = mysqli_query($link,"SELECT * FROM session WHERE computer=$computer_id AND date='$date'".$session_condition);
     while($session=mysqli_fetch_array($sessions)):
         $key = array_search(date('h:i a',strtotime($session['time_start'])), $timeIntervalArray);
         $duration = $session['duration']/30;
@@ -43,7 +61,7 @@
         }
         $time_24 = date('H:i:s',strtotime($time));
         echo "
-        <tr name='session-tr' id='$time_24' class='";
+        <tr name='session-tr' id='".$edit_id_prefix.$time_24."' class='";
         if($temp_duration > 0){
             echo 'occupied';
             $temp_duration--;
