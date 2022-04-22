@@ -105,23 +105,25 @@
                 </table>
             </div>
         </div>
-        <div class="page-modal">
+        <div class="page-modal" id='0'>
             <div id="page-modal-container" class="page-modal-container" style='width:500px; height:auto; margin-bottom:80px; margin-top:40px; display:flex; align-items:center;'>
                 <form class='modal-form container' method="post" action="static/function/insert_reservation.php" style='flex:60%;'>
                     <input type='hidden' name='user_id' value='<?php echo $_SESSION['id']; ?>'>
                     <div class="row" style='margin-bottom:10px;'>
                         <h3>Create Reservation</h3>
+                        <h6>You are only allowed 3 Hours Per Day</h6>
                     </div>
-                    <div class="row" style='margin-bottom:10px;'>
+                    <div class="row" style='margin-bottom:10px; display:none;'>
                         <div class='col-md-10 offset-md-1 p-0'>Do you need to reserve a specific Computer?</div>
                         <div class="col-md-10 offset-md-1 p-0" style='margin-bottom:0px;'>
-                            <input type="radio" id="specific-yes" name="specific" value="yes" onclick="#">
+                            <input type="radio" id="specific-yes" name="specific" value="yes" onclick="#" checked>
                             <label for="specific-yes">Yes</label><br>
                             <input type="radio" id="specific-no" name="specific" value="no" onclick="#">
                             <label for="specific-no">No</label><br>
                         </div>
                     </div>
-                    <div class="row hidden" style='margin-bottom:10px;' id='select-laboratory-div'>
+                    <input type='hidden' name="specific" value="yes">
+                    <div class="row" style='margin-bottom:10px;' id='select-laboratory-div'>
                         <div class='col-md-10 offset-md-1 p-0'>Select Laboratory</div>
                         <div class="col-md-10 offset-md-1 p-0">
                             <select name='laboratory' id='laboratory' class='col-md-12'>
@@ -294,21 +296,22 @@
         </script>
         <script>
             $(document).ready(function (){
+                $.ajax({
+                    url:"static/function/load_labs.php",
+                    method:"POST",
+                    data:{},
+                    dataType:"html",
+                    success:function(data){
+                        document.getElementById('select-laboratory-div').classList.remove('hidden');
+                        $("#laboratory").html(data);
+                        resetForm();
+                    },
+                    error:function(){
+                        alert("Something went wrong");
+                    }
+                });
                 $(document).on('click', '#specific-yes', function() {
-                    $.ajax({
-                        url:"static/function/load_labs.php",
-                        method:"POST",
-                        data:{},
-                        dataType:"html",
-                        success:function(data){
-                            document.getElementById('select-laboratory-div').classList.remove('hidden');
-                            $("#laboratory").html(data);
-                            resetForm();
-                        },
-                        error:function(){
-                            alert("Something went wrong");
-                        }
-                    });
+                    return;
                 });
 
                 
@@ -410,7 +413,7 @@
                         $.ajax({
                             url:"static/function/load_reservation_durations.php",
                             method:"POST",
-                            data:{computer_id:computer_id,date:dateInput,lab:lab_id,time_start:time_start,time_end:time_end,time:timeInput},
+                            data:{computer_id:computer_id,date:dateInput,lab:lab_id,time_start:time_start,time_end:time_end,time:timeInput,student_id:<?php echo $student_id; ?>},
                             dataType:"html",
                             success:function(data){
                                 $("#duration").html(data);

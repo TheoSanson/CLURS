@@ -29,7 +29,6 @@
         break;
     endwhile;
 
-
     $start = strtotime($time);
     $end = strtotime($latest_session_time);
     $minutes = ($end - $start) / 60 / 30;
@@ -37,7 +36,25 @@
     if($minutes > 6){
         $minutes = 6;
     }
-
+    
+    if(isset($_POST['student_id'])){
+        $user_id = $_POST['student_id'];
+        $result = mysqli_query($link, "SELECT SUM(duration) AS duration_sum FROM session WHERE date='$date' AND user=$user_id"); 
+        $row = mysqli_fetch_assoc($result); 
+        $sum = $row['duration_sum'];
+        if($sum >= 180){
+            echo "<script>
+                alert('You already have 3 Hours for this day');
+            </script>";
+            $minutes = 0;
+        }
+        else{
+            $new_minutes = (180 - $sum) / 30;
+            if($new_minutes < $minutes){
+                $minutes = $new_minutes;
+            }
+        }
+    }
     $array_name = [
         '30 Mins',
         '1 Hour',

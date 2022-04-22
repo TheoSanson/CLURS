@@ -337,6 +337,7 @@
                         alert("Something went wrong");
                     }
                 });
+                
                 $.ajax({
                     url:"static/function/load_session_list.php",
                     method:"POST",
@@ -362,6 +363,7 @@
                         alert("Something went wrong");
                     }
                 });
+
                 $.ajax({
                     url:"static/function/load_computer_data.php",
                     method:"POST",

@@ -26,20 +26,46 @@
                 $url.= $_SERVER['REQUEST_URI'];
             ?>   
             <div class="active-tab"></div>
+            <?php if($_SESSION['access_level'] == 0){ ?>
             <li class="tooltip-element" data-tooltip="0">
-                <a href="#" <?php if(strpos($url, 'admin-dashboard.php')) { echo "class='active'"; $activeIndex = 0; }?> data-active="0">
+                <a href="student-reservation.php" <?php if(strpos($url, 'student-reservation.php')) { echo "class='active'"; $activeIndex = 0; }?> data-active="0">
+                    <div class="icon">
+                        <i class='bx bx-home-alt-2'></i>
+                        <i class='bx bxs-home-alt-2' ></i>
+                    </div>
+                    <span class="link hide">Home</span>
+                </a>
+            </li>
+            <li class="tooltip-element" data-tooltip="1">
+                <a href="/CLURS/account.php" <?php if(strpos($url, 'account.php')) { echo "class='active'"; $activeIndex = 1; }?> data-active="1">
                 <div class="icon">
-                    <i class="bx bx-tachometer"></i>
-                    <i class="bx bxs-tachometer"></i>
+                    <i class='bx bxs-user-account'></i>
+                    <i class='bx bxs-user-account'></i>
                 </div>
-                <span class="link hide">Dashboard</span>
+                <span class="link hide">Account Management</span>
+                </a>
+            </li>
+            <div class="tooltip">
+                <!-- Specify Any Additional Tooltips! -->
+                <span class="show">Home</span>
+                <span>Account Mgmt</span>
+            </div>
+            <?php } 
+                else { ?>
+            <li class="tooltip-element" data-tooltip="0">
+                <a href="/CLURS/admin-lab.php" <?php if(strpos($url, 'admin-dashboard.php')) { echo "class='active'"; $activeIndex = 0; }?> data-active="0">
+                    <div class="icon">
+                        <i class="bx bx-tachometer"></i>
+                        <i class="bx bxs-tachometer"></i>
+                    </div>
+                    <span class="link hide">Dashboard</span>
                 </a>
             </li>
             <li class="tooltip-element" data-tooltip="1">
                 <a href="/CLURS/admin-lab.php" <?php if(strpos($url, 'admin-lab') || strpos($url, 'admin-class.php')) { echo "class='active'"; $activeIndex = 1; }?> data-active="1">
                 <div class="icon">
-                    <i class="bx bx-folder"></i>
-                    <i class="bx bxs-folder"></i>
+                    <i class='bx bx-desktop'></i>
+                    <i class='bx bx-desktop'></i>
                 </div>
                 <span class="link hide">Lab Management</span>
                 </a>
@@ -47,39 +73,41 @@
             <li class="tooltip-element" data-tooltip="2">
                 <a href="/CLURS/admin-staff.php" <?php if(strpos($url, 'admin-staff.php')) { echo "class='active'"; $activeIndex = 2; }?> data-active="2">
                 <div class="icon">
-                    <i class="bx bx-message-square-detail"></i>
-                    <i class="bx bxs-message-square-detail"></i>
+                    <i class='bx bx-user' ></i>
+                    <i class='bx bx-user' ></i>
                 </div>
                 <span class="link hide">Admin User Mgmt.</span>
                 </a>
             </li>
             <li class="tooltip-element" data-tooltip="3">
-                <a href="#" data-active="3">
+                <a href="/CLURS/admin-student.php" <?php if(strpos($url, 'admin-student.php')) { echo "class='active'"; $activeIndex = 3; }?> data-active="3">
                 <div class="icon">
-                    <i class="bx bx-bar-chart-square"></i>
-                    <i class="bx bxs-bar-chart-square"></i>
+                    <i class='bx bxs-user-badge' ></i>
+                    <i class='bx bxs-user-badge' ></i>
                 </div>
-                <span class="link hide">Analytics</span>
+                <span class="link hide">Student User Mgmt.</span>
                 </a>
             </li>
             <li class="tooltip-element" data-tooltip="4">
-                <a href="#" data-active="4">
+                <a href="/CLURS/account.php" <?php if(strpos($url, 'account.php')) { echo "class='active'"; $activeIndex = 4; }?> data-active="4">
                 <div class="icon">
-                    <i class="bx bx-bar-chart-square"></i>
-                    <i class="bx bxs-bar-chart-square"></i>
+                    <i class='bx bxs-user-account'></i>
+                    <i class='bx bxs-user-account'></i>
                 </div>
-                <span class="link hide">Analytics</span>
+                <span class="link hide">Account Management</span>
                 </a>
             </li>
             <div class="tooltip">
                 <!-- Specify Any Additional Tooltips! -->
                 <span class="show">Dashboard</span>
                 <span>Lab Mgmt.</span>
-                <span>Admin Mgmt</span>
-                <span>Analytics</span>
-                <span>Last Analytics</span>
+                <span>Admin Mgmt.</span>
+                <span>Student Mgmt.</span>
+                <span>Account Mgmt.</span>
             </div>
+            <?php } ?>
             </ul>
+            <!--
             <h4 class="hide">Shortcuts</h4>
             <ul>
             <li class="tooltip-element" data-tooltip="0">
@@ -114,7 +142,7 @@
                 <span>Help</span>
                 <span>Settings</span>
             </div>
-            </ul>
+            </ul> -->
         </div>
         <div class="sidebar-footer">
             <a href="#" class="account tooltip-element" data-tooltip="0">
