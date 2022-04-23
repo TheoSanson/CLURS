@@ -4,6 +4,7 @@
         <?php 
             include "static/include/head.php";
             include "static/include/table-plugin.php"; 
+            include "static/function/authenticateAdmin.php";
         ?>
         <link href="static/assets/css/list.css" rel="stylesheet">
         <title>Laboratories</title>
@@ -107,19 +108,19 @@
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Lab Room Name</div>
-                        <input type='text' name='labname' class='col-md-10 offset-md-1 p-1'>
+                        <input type='text' name='labname' class='col-md-10 offset-md-1 p-1' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Time Opened</div>
-                        <input type='time' name='time_open' class='col-md-10 offset-md-1 p-1'>
+                        <input type='time' id='add_time_start' name='time_open' class='col-md-10 offset-md-1 p-1' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Time Closed</div>
-                        <input type='time' name='time_close' class='col-md-10 offset-md-1 p-1'>
+                        <input type='time' id='add_time_end' name='time_close' class='col-md-10 offset-md-1 p-1' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Initial No. of PCs</div>
-                        <input type='number' name='pc-qty' class='col-md-10 offset-md-1 p-1'>
+                        <input type='number' name='pc-qty' class='col-md-10 offset-md-1 p-1' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0' style='display:flex; margin-top:20px;'><button type='button' class='btn btn-secondary close-modal' style='flex:0.8;'>Cancel</button><input type='submit' class='btn btn-primary' style='margin-left:20px;flex:1;' value='Add'></div>
@@ -136,6 +137,16 @@
             $(document).on('click', '.datatable-row', function() {
                 var id = $(this).attr('name');
                 window.location.href = "admin-lab-view.php?id="+id;
+            });
+
+            $(document).on('change', '#add_time_start', function() {
+                validate30Minutes('add_time_start');
+                return validateTime('add');
+            });
+
+            $(document).on('change', '#add_time_end', function() {
+                validate30Minutes('add_time_end');
+                return validateTime('add');
             });
         </script>
     </body>

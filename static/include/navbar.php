@@ -1,3 +1,6 @@
+<?php
+    include "static/function/authenticate.php";
+?>
 <div class="wrapper">
     <nav>
         <div class="sidebar-top">
@@ -51,9 +54,10 @@
                 <span>Account Mgmt</span>
             </div>
             <?php } 
-                else { ?>
+                else { 
+            ?>
             <li class="tooltip-element" data-tooltip="0">
-                <a href="/CLURS/admin-lab.php" <?php if(strpos($url, 'admin-dashboard.php')) { echo "class='active'"; $activeIndex = 0; }?> data-active="0">
+                <a href="/CLURS/admin-dashboard.php" <?php if(strpos($url, 'admin-dashboard.php')) { echo "class='active'"; $activeIndex = 0; }?> data-active="0">
                     <div class="icon">
                         <i class="bx bx-tachometer"></i>
                         <i class="bx bxs-tachometer"></i>
