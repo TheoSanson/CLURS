@@ -8,7 +8,7 @@
     if(mysqli_query($link,$sql)){
         $lab_id = $link->insert_id;
         for($i = 0; $i < $computers; $i++){
-            mysqli_query($link,"INSERT INTO computer(vacancy,status,remarks,lab) VALUES('Vacant','Stand By','',$lab_id)");
+            mysqli_query($link,"INSERT INTO computer(vacancy,status,remarks,lab) VALUES('Vacant','Available','',$lab_id)");
         }
         
         echo "	<script type='text/javascript'>
