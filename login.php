@@ -13,11 +13,11 @@
         </div>
         <form method='POST' action='static/function/login.php'>
             <div class="user-box">
-                <input type="text" name="username" required="">
+                <input type="text" name="username" required="" required>
                 <label>Username</label>
             </div>
             <div class="user-box">
-                <input type="password" name="password" required="">
+                <input type="password" name="password" required="" required>
                 <label>Password</label>
             </div>
             <div class='btn-box' style='position:relative; display:flex; flex-direction:column; align-items:center;'>

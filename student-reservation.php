@@ -126,30 +126,30 @@
                     <div class="row" style='margin-bottom:10px;' id='select-laboratory-div'>
                         <div class='col-md-10 offset-md-1 p-0'>Select Laboratory</div>
                         <div class="col-md-10 offset-md-1 p-0">
-                            <select name='laboratory' id='laboratory' class='col-md-12'>
+                            <select name='laboratory' id='laboratory' class='col-md-12' required>
                             </select>
                         </div>
                     </div>
                     <div class="row hidden" style='margin-bottom:10px;' id='select-computer-div'>
                         <div class='col-md-10 offset-md-1 p-0'>Select Computer</div>
                         <div class="col-md-10 offset-md-1 p-0" style='margin-bottom:5px;' id='select-computer'>
-                            <select name='computer' id='computer' class='col-md-12'>
+                            <select name='computer' id='computer' class='col-md-12' required>
                             </select>
                         </div>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Select Date</div>
-                        <input id='date' type='date' name='date' class='col-md-10 offset-md-1' style='padding-left:0px;'>
+                        <input id='date' type='date' name='date' class='col-md-10 offset-md-1' style='padding-left:0px;' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0' style='margin-bottom:0px;'>Time Start</div>
                         <div class='col-md-10 offset-md-1 p-0' style='font-size:13px;'>Please Select 30 Minute Intervals (7:00, 7:30, 8:00, etc..)</div>
-                        <input type='time' name='time_start' id='time_start' class='col-md-10 offset-md-1' style='padding-left:0px;' step='1800'>
+                        <input type='time' name='time_start' id='time_start' class='col-md-10 offset-md-1' style='padding-left:0px;' step='1800' required>
                     </div>
                     <div class="row" style='margin-bottom:10px;'>
                         <div class='col-md-10 offset-md-1 p-0'>Duration</div>
                         <div class="col-md-10 offset-md-1 p-0" style='margin-bottom:15px;'>
-                            <select name='duration' id='duration' class='col-md-12'>
+                            <select name='duration' id='duration' class='col-md-12' required>
                                 <option value=''>-----</option>
                                 <option value='30'>30 Minutes</option>
                                 <option value='60'>1 Hour</option>

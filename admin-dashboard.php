@@ -2,7 +2,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php include "static/include/head.php"; ?>
+    <?php 
+        include "static/include/head.php";
+        include "static/function/authenticateAdmin.php";
+    ?>
     <link href="static/assets/css/dashboard.css" rel="stylesheet">
     <title>Dashboard</title>
 </head>

@@ -4,6 +4,7 @@
         <?php 
             include "static/include/head.php";
             include "static/include/table-plugin.php"; 
+            include "static/function/authenticateAdmin.php";
         ?>
         <link href="static/assets/css/list.css" rel="stylesheet">
         <title>Laboratories</title>
@@ -123,19 +124,19 @@
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Session Description</div>
-                        <input type='text' name='session_desc' class='col-md-10 offset-md-1 p-1'>
+                        <input type='text' name='session_desc' class='col-md-10 offset-md-1 p-1' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Date</div>
-                        <input type='date' name='date' class='col-md-10 offset-md-1 p-1'>
+                        <input type='date' id='repeat-start' name='date' class='col-md-10 offset-md-1 p-1' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Time Start</div>
-                        <input type='time' name='time_start' class='col-md-10 offset-md-1 p-1' step='1800'>
+                        <input type='time' id='add_time_start' name='time_start' class='col-md-10 offset-md-1 p-1' step='1800' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Time End</div>
-                        <input type='time' name='time_end' class='col-md-10 offset-md-1 p-1' step='1800'>
+                        <input type='time' id='add_time_end' name='time_end' class='col-md-10 offset-md-1 p-1' step='1800' required>
                     </div>
                     <div class="row">
                         <div class="col-md-10 offset-md-1 p-0">
@@ -150,7 +151,7 @@
                         </div>
                         <div class="col-md-10 offset-md-1 p-0">
                             <div class='col-md-12 p-0'>Until</div>
-                            <input type='date' name='repeat-end' id='repeat-end' class='col-md-12' disabled>
+                            <input type='date' name='repeat-end' id='repeat-end' class='col-md-12' disabled required> 
                         </div>
                     </div>
                     <div class="row">
@@ -169,11 +170,11 @@
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Time Start</div>
-                        <input type='time' name='time_open' class='col-md-10 offset-md-1 p-1' step='1800' value='<?php echo $lab['time_open']; ?>'>
+                        <input type='time' id='labsched_edit_time_start' name='time_open' class='col-md-10 offset-md-1 p-1' step='1800' value='<?php echo $lab['time_open']; ?>' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Time End</div>
-                        <input type='time' name='time_close' class='col-md-10 offset-md-1 p-1' step='1800' value='<?php echo $lab['time_close']; ?>'>
+                        <input type='time' id='labsched_edit_time_end' name='time_close' class='col-md-10 offset-md-1 p-1' step='1800' value='<?php echo $lab['time_close']; ?>' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0' style='display:flex; margin-top:20px;'>
@@ -192,11 +193,11 @@
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Time Start</div>
-                        <input type='time' id='edit-time_start' name='time_start' class='col-md-10 offset-md-1 p-1' step='1800' value=''>
+                        <input type='time' id='edit_time_start' name='time_start' class='col-md-10 offset-md-1 p-1' step='1800' value='' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Time End</div>
-                        <input type='time' id='edit-time_end' name='time_end' class='col-md-10 offset-md-1 p-1' step='1800' value=''>
+                        <input type='time' id='edit_time_end' name='time_end' class='col-md-10 offset-md-1 p-1' step='1800' value='' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0' style='display:flex; margin-top:20px;'>
@@ -257,8 +258,8 @@
             $(document).on('click', '.open-edit-modal', function() {
                 var session_id = $(this).attr('name');
                 document.getElementById('session_id').value = session_id;
-                document.getElementById('edit-time_start').value = $('#'+session_id+'-time_start').attr('name');
-                document.getElementById('edit-time_end').value = $('#'+session_id+'-time_end').attr('name');
+                document.getElementById('edit_time_start').value = convertTime12to24($('#'+session_id+'-time_start').attr('name'));
+                document.getElementById('edit_time_end').value = convertTime12to24($('#'+session_id+'-time_end').attr('name'));
                 openModal(2);
                 return 0;
             });
@@ -303,7 +304,89 @@
                     document.getElementById('occurrence').disabled = true;
                     document.getElementById('repeat-end').disabled = true;
                 }
+            };
+
+            $(document).on('change', '#add_time_start', function() {
+                validate30Minutes('add_time_start');
+                return validateTime('add');
+            });
+
+            $(document).on('change', '#add_time_end', function() {
+                validate30Minutes('add_time_end');
+                return validateTime('add');
+            });
+
+            $(document).on('change', '#labsched_edit_time_start', function() {
+                validate30Minutes('labsched_edit_time_start');
+                return validateTime('labsched_edit');
+            });
+
+            $(document).on('change', '#labsched_edit_time_end', function() {
+                validate30Minutes('labsched_edit_time_end');
+                return validateTime('labsched_edit');
+            });
+
+            $(document).on('change', '#edit_time_start', function() {
+                validate30Minutes('edit_time_start');
+                return validateTime('edit');
+            });
+            $(document).on('change', '#edit_time_end', function() {
+                validate30Minutes('edit_time_end');
+                return validateTime('edit');
+            });
+            $(document).on('change', '#repeat-start', function() {
+                return validateDate();
+            });
+            $(document).on('change', '#repeat-end', function() {
+                return validateDate();
+            });
+
+
+            function validateTime(type){
+                time_start = document.getElementById(type+'_time_start');
+                time_end = document.getElementById(type+'_time_end');
+                if(time_start.value != '' && time_end.value != ''){
+                    if(time_start.value>time_end.value){
+                        alert('Time-End cannot be before Time-Start!');
+                        time_end.value = '';
+                        return false;
+                    }
+                    else{
+                        return true;
+                    }
+                }
+            };
+
+            function validateDate(){
+                date_start = document.getElementById('repeat-start');
+                date_end = document.getElementById('repeat-end');
+                if(date_start.value != '' && date_end.value != ''){
+                    if(date_start.value>date_end.value){
+                        alert('Date End cannot be before Date Start!');
+                        date_end.value = '';
+                        return false;
+                    }
+                    else{
+                        return true;
+                    }
+                }
             }
+
+            const convertTime12to24 = (time12h) => {
+                const [time, modifier] = time12h.split(' ');
+
+                let [hours, minutes] = time.split(':');
+
+                if (hours === '12') {
+                    hours = '00';
+                }
+
+                if (modifier === 'pm') {
+                    hours = parseInt(hours, 10) + 12;
+                }
+
+                return `${hours}:${minutes}`;
+            };
         </script>
     </body>
 </html>

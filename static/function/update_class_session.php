@@ -17,7 +17,7 @@
             while($r_session=mysqli_fetch_array($r_sessions)):
                 $r_sql = "UPDATE class_session SET time_start='$time_start', time_end='$time_end',duration=$minutes WHERE id=".$r_session['id'];
                 mysqli_query($link,$r_sql);
-                
+
                 #CODE FOR DELETE SESSION
                 $sessions_to_delete = mysqli_query($link,"SELECT session.id, session.user FROM session INNER JOIN computer ON session.computer = computer.id WHERE computer.lab=$lab_id AND date='".$r_session['date']."' AND (time_start<='$time_start' AND time_end>'$time_start' OR time_start<'$time_end' AND time_end>='$time_end')");
                 while($session_to_delete = mysqli_fetch_array($sessions_to_delete)):

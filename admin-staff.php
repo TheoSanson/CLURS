@@ -3,7 +3,8 @@
     <head>
         <?php 
             include "static/include/head.php";
-            include "static/include/table-plugin.php"; 
+            include "static/include/table-plugin.php";
+            include "static/function/authenticateAdmin.php"; 
         ?>
         <link href="static/assets/css/list.css" rel="stylesheet">
         <title>Laboratories</title>
@@ -90,27 +91,27 @@
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>User Name</div>
-                        <input type='text' name='username' class='col-md-10 offset-md-1 p-1'>
+                        <input type='text' name='username' class='col-md-10 offset-md-1 p-1' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>School ID</div>
-                        <input type='text' name='school_id' class='col-md-10 offset-md-1 p-1'>
+                        <input type='text' name='school_id' class='col-md-10 offset-md-1 p-1' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>First Name</div>
-                        <input type='text' name='firstname' class='col-md-10 offset-md-1 p-1'>
+                        <input type='text' name='firstname' class='col-md-10 offset-md-1 p-1' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Last Name</div>
-                        <input type='text' name='lastname' class='col-md-10 offset-md-1 p-1'>
+                        <input type='text' name='lastname' class='col-md-10 offset-md-1 p-1' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Email</div>
-                        <input type='text' name='email' class='col-md-10 offset-md-1 p-1'>
+                        <input type='text' name='email' class='col-md-10 offset-md-1 p-1' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Contact No.</div>
-                        <input type='text' name='contactno' class='col-md-10 offset-md-1 p-1'>
+                        <input type='text' name='contactno' class='col-md-10 offset-md-1 p-1' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0' style='display:flex; margin-top:20px;'><button type='button' class='btn btn-secondary close-modal' style='flex:0.8;'>Cancel</button><input type='submit' class='btn btn-success' style='margin-left:20px;flex:1;' value='Add'></div>
@@ -128,27 +129,27 @@
                     <input type='hidden' id='access_level' name='access_level' value='1'>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>User Name</div>
-                        <input type='text' id='edit-username' name='username' class='col-md-10 offset-md-1 p-1'>
+                        <input type='text' id='edit-username' name='username' class='col-md-10 offset-md-1 p-1' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>School ID</div>
-                        <input type='text' id='edit-school_id' name='school_id' class='col-md-10 offset-md-1 p-1'>
+                        <input type='text' id='edit-school_id' name='school_id' class='col-md-10 offset-md-1 p-1' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>First Name</div>
-                        <input type='text' id='edit-firstname' name='firstname' class='col-md-10 offset-md-1 p-1'>
+                        <input type='text' id='edit-firstname' name='firstname' class='col-md-10 offset-md-1 p-1' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Last Name</div>
-                        <input type='text' id='edit-lastname' name='lastname' class='col-md-10 offset-md-1 p-1'>
+                        <input type='text' id='edit-lastname' name='lastname' class='col-md-10 offset-md-1 p-1' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Email</div>
-                        <input type='text' id='edit-email' name='email' class='col-md-10 offset-md-1 p-1'>
+                        <input type='text' id='edit-email' name='email' class='col-md-10 offset-md-1 p-1' required>
                     </div>
                     <div class="row">
                         <div class='col-md-10 offset-md-1 p-0'>Contact No.</div>
-                        <input type='text' id='edit-contactno' name='contactno' class='col-md-10 offset-md-1 p-1'>
+                        <input type='text' id='edit-contactno' name='contactno' class='col-md-10 offset-md-1 p-1' required>
                     </div>
                     <div class="row">
                         <div class="col-md-10 offset-md-1 p-0" style='display:flex; align-items:center;'>

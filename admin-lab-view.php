@@ -9,7 +9,10 @@
     $lab_id = $_REQUEST['id'];
 ?>
 <body>
-    <?php include "static/include/navbar.php"; ?>
+    <?php 
+        include "static/include/navbar.php";
+        include "static/function/authenticateAdmin.php";
+    ?>
     <div class="p-1 my-container active-cont">
         <div class="center-container">
             <h2>Laboratory Manager</h2>
@@ -44,7 +47,7 @@
                 </div>
                 <div class="row">
                     <div class='col-md-10 offset-md-1 p-0'>No. of PCs to Add</div>
-                    <input type='number' name='pc-qty' class='col-md-10 offset-md-1 p-1'>
+                    <input type='number' name='pc-qty' class='col-md-10 offset-md-1 p-1' required>
                 </div>
                 <div class="row">
                     <div class='col-md-10 offset-md-1 p-0' style='display:flex; margin-top:20px;'><button type='button' class='btn btn-secondary close-modal' style='flex:0.8;'>Cancel</button><input type='submit' class='btn btn-primary' style='margin-left:20px;flex:1;' value='Add'></div>
@@ -60,7 +63,6 @@
         </div>
     </div>
     <?php include "static/include/scripts.php"; ?>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
     <script>
         $(document).ready(function (){
             loadComputers();

@@ -5,6 +5,7 @@
     <?php 
         include "static/include/head.php";
         include "static/include/table-plugin.php"; 
+        include "static/function/authenticateAdmin.php";
     ?>
     <link href="static/assets/css/list.css" rel="stylesheet">
     <link href="static/assets/css/schedule.css" rel="stylesheet">
@@ -316,11 +317,19 @@
             var lab_id = <?php echo $computer['lab']; ?>;
             var dateInput = document.getElementById('date').value;
             var date = new Date(dateInput);
-            var day = date.getDay();
-            if(day==0 || day == 6){
-                alert('Please Select a Weekday');
-                document.getElementById('date').value = '';
-                return;
+            var curdate = new Date();
+            console.log(curdate);
+            console.log(date);
+            if(curdate.getDate()==date.getDate()){
+                console.log('Current Date is Weekend!');
+            }
+            else{
+                var day = date.getDay();
+                if(day==0 || day == 6){
+                    alert('Please Select a Weekday');
+                    document.getElementById('date').value = '';
+                    return;
+                }
             }
             var time_start = '<?php echo $time_open; ?>';
             var time_end = '<?php echo $time_close; ?>';
@@ -378,6 +387,10 @@
                 });
             }
         };
+        
+        $(document).on('change', '#time_start', function() {
+            validate30Minutes('time_start');
+        });
     </script>
 </body>
 </html>
