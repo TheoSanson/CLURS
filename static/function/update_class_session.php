@@ -25,7 +25,10 @@
                     $record = mysqli_query($link,"SELECT * FROM user WHERE id=$user_id");
                     $user=mysqli_fetch_array($record);
                     if(isset($user)){
-                        $user['email']; #DALE Email User that their Session Was Overlapped by a Class Schedule!
+                        $user['email'];
+                        
+                        
+                        #DALE Email User that their Session Was Overlapped by a Class Schedule!
                         #PASTE EMAIL CODE HERE
                     }
                     mysqli_query($link,"DELETE FROM session WHERE id=".$session_to_delete['id']);

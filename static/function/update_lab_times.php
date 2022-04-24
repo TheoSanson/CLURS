@@ -1,4 +1,5 @@
 <?php
+    require "PHPMailer/PHPMailerAutoload.php";
     include "database.php";
     $lab_id = $_POST['lab_id'];
     $time_open = $_POST['time_open'];
@@ -12,8 +13,51 @@
         $record = mysqli_query($link,"SELECT * FROM user WHERE id=$user_id");
         $user=mysqli_fetch_array($record);
         if(isset($user)){
-            echo $user['email']; #DALE Email User that their Session Was Overlapped by a Class Schedule!
+            echo $email = $user['email']; 
+            
+            
+            #DALE Email User that their Session Was Overlapped by a Class Schedule!
             #PASTE EMAIL CODE HERE
+            // PHP MAILER START
+            $phpmailer = new PHPMailer();
+
+            try {
+                //Server settings
+
+                $phpmailer->isSMTP();
+                $phpmailer->Host = 'smtp.gmail.com';
+                $phpmailer->SMTPAuth = true;
+                $phpmailer->Port = 587;
+                $phpmailer->Username = 'notificationemailtest30@gmail.com';
+                $phpmailer->Password = 'temporaryemail1999';
+
+
+                $phpmailer->setFrom('testemailrandomidk@gmail.com', 'ICS COMLAB');
+                $phpmailer->addAddress($email);
+
+
+                //Content
+                $phpmailer->isHTML(true);                                  //Set email format to HTML
+                $phpmailer->Subject = 'Notification |ICS COMLAB'; 
+                $phpmailer->Body    = "
+                    <center>
+                    <img src='' alt='header' border='0'>
+                        <h1> Session Was Overlapped by a Class Schedule!</h2>
+                    </center>
+                    <br>
+
+                    </p>
+                
+                
+            ";
+
+                $phpmailer->send();
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$phpmailer->ErrorInfo}";
+            }
+  
+
+            // END EMAIL
         }
         mysqli_query($link,"DELETE FROM session WHERE id=".$session_to_delete['id']);
     endwhile;

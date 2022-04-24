@@ -109,6 +109,7 @@
             <div id="page-modal-container" class="page-modal-container" style='width:500px; height:auto; margin-bottom:80px; margin-top:40px; display:flex; align-items:center;'>
                 <form class='modal-form container' method="post" action="static/function/insert_reservation.php" style='flex:60%;'>
                     <input type='hidden' name='user_id' value='<?php echo $_SESSION['id']; ?>'>
+                    <input type='hidden' name='email' value='<?php echo $_SESSION['email']; ?>'>
                     <div class="row" style='margin-bottom:10px;'>
                         <h3>Create Reservation</h3>
                         <h6>You are only allowed 3 Hours Per Day</h6>

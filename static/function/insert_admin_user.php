@@ -1,4 +1,5 @@
 <?php
+    require "PHPMailer/PHPMailerAutoload.php";
     include 'database.php';
     $school_id = $_POST['school_id'];
     $username = $_POST['username'];
@@ -16,7 +17,63 @@
         $randomString .= $characters[rand(0, $charactersLength - 1)];
     }
 
-    $password = $randomString; #DALE Email password to email given
+    $password = $randomString; 
+    
+    #DALE Email password to email given
+    #PASTE EMAIL CODE HERE
+            // PHP MAILER START
+            $phpmailer = new PHPMailer();
+
+            try {
+                //Server settings
+
+                $phpmailer->isSMTP();
+                $phpmailer->Host = 'smtp.gmail.com';
+                $phpmailer->SMTPAuth = true;
+                $phpmailer->Port = 587;
+                $phpmailer->Username = 'notificationemailtest30@gmail.com';
+                $phpmailer->Password = 'temporaryemail1999';
+
+
+                $phpmailer->setFrom('testemailrandomidk@gmail.com', 'ICS COMLAB');
+                $phpmailer->addAddress($email);
+
+
+                //Content
+                $phpmailer->isHTML(true);                                  //Set email format to HTML
+                $phpmailer->Subject = 'Notification |ICS COMLAB'; 
+                $phpmailer->Body    = "
+                    <center>
+                    <img src='' alt='header' border='0'>
+                        <h1>Your Account has been Created Successfully </h2>
+                    </center>
+                    <br>
+                    <hr>
+                    <table>
+                        <tr>
+                            <th>Username</th>
+                            <th>Password</th>
+                        </tr>
+                        <tr>
+                            <td>$username</td>
+                            <td>$password</td>
+                        </tr>
+
+                    </table>
+
+                    </p>
+                <hr>
+                
+                
+            ";
+
+                $phpmailer->send();
+            } catch (Exception $e) {
+                echo "Message could not be sent. Mailer Error: {$phpmailer->ErrorInfo}";
+            }
+  
+
+            // END EMAIL
 
     $sql = "INSERT INTO user(username, password, firstname, lastname, school_id, access_level, contactno, email) VALUES ('$username','$password','$firstname','$lastname','$school_id',$access_level,'$contactno','$email')";
     if(mysqli_query($link,$sql)){

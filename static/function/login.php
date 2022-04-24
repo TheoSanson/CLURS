@@ -24,6 +24,7 @@
             $_SESSION['pass'] = $password;
             $_SESSION['firstname'] = $user['firstname'];
             $_SESSION['lastname'] = $user['lastname'];
+            $_SESSION['email'] = $user['email'];
             $_SESSION['access_level'] = $user['access_level'];
             if($user['access_level'] == 0){
                 echo "	<script type='text/javascript'>
@@ -58,6 +59,7 @@
 			$_SESSION["schoolid"] = $user['school_id'];
             $_SESSION['firstname'] = $user['firstname'];
             $_SESSION['lastname'] = $user['lastname'];
+            $_SESSION['email'] = $user['email'];
             $_SESSION['access_level'] = $user['access_level'];
             echo "	<script type='text/javascript'>
                         window.location='/clurs/student-reservation.php';
