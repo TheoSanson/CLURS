@@ -74,7 +74,10 @@
                             <?php echo $lab['name']; ?>
                             </td>
                             <td style='width:15%;'>
-                                <?php echo $lab['total_seats']; ?>
+                                <?php 
+                                    $pcs = mysqli_query($link,"SELECT * FROM computer WHERE lab=".$lab['id']);
+                                    echo mysqli_num_rows($pcs); 
+                                ?>
                             </td>
                             <td style='width:30%;'>
                             <?php 
