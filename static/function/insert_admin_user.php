@@ -79,7 +79,7 @@
     if(mysqli_query($link,$sql)){
         echo "	<script type='text/javascript'>
             console.log('$password');
-            window.location='/clurs/admin-staff.php';
+            window.location='../../admin-staff.php';
         </script>";
     }
 	else

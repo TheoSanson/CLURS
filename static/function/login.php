@@ -12,7 +12,7 @@
         if($count == 0){
             echo "	<script type='text/javascript'>
                         alert('Incorrect Credentials');
-                        window.location='/clurs/login.php';
+                        window.location='../../index.php';
                     </script>";
         }	
         else {
@@ -28,12 +28,12 @@
             $_SESSION['access_level'] = $user['access_level'];
             if($user['access_level'] == 0){
                 echo "	<script type='text/javascript'>
-                           window.location='/clurs/student-reservation.php';
+                           window.location='../../student-reservation.php';
                         </script>";
             }
             else{
                 echo "	<script type='text/javascript'>
-                           window.location='/clurs/admin-dashboard.php';
+                           window.location='../../admin-dashboard.php';
                         </script>";
             }
         }
@@ -48,7 +48,7 @@
         if($count == 0){
             echo "	<script type='text/javascript'>
                        alert('No Record of Given Username');
-                       window.location='/clurs/login.php';
+                       window.location='../../index.php';
                    </script>";
         }	
         else {
@@ -62,7 +62,7 @@
             $_SESSION['email'] = $user['email'];
             $_SESSION['access_level'] = $user['access_level'];
             echo "	<script type='text/javascript'>
-                        window.location='/clurs/student-reservation.php';
+                        window.location='../../student-reservation.php';
                     </script>";
         }
     }

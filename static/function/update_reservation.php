@@ -8,6 +8,6 @@
     $time_end = date('H:i:s',strtotime($time_start." +$duration mins"));
     mysqli_query($link,"UPDATE session SET date = '$date', time_start='$time_start', time_end='$time_end', duration=$duration WHERE id=$session_id");
     echo "<script>
-        window.location.href = '/clurs/admin-computer-view.php?id='+$computer_id;
+        window.location.href = '../../admin-computer-view.php?id='+$computer_id;
     </script>";
 ?>

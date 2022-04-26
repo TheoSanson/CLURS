@@ -81,6 +81,6 @@
     }
 
     echo "<script>
-        window.location.href = '/clurs/admin-computer-view.php?id='+$computer_id;
+        window.location.href = '../../admin-computer-view.php?id='+$computer_id;
     </script>";
 ?>

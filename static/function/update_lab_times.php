@@ -63,6 +63,6 @@
     endwhile;
 
     echo "<script>
-        window.location.href = '/CLURS/admin-class.php?id='+$lab_id;
+        window.location.href = '../../admin-class.php?id='+$lab_id;
     </script>";
 ?>

@@ -89,7 +89,7 @@
 
         #Redirect
         echo "	<script type='text/javascript'>
-           window.location='/clurs/admin-class.php?id=$lab';
+           window.location='../../admin-class.php?id=$lab';
         </script>";
     }
 	else

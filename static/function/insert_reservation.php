@@ -69,7 +69,7 @@
 
                  $phpmailer->send();
                   echo "	<script type='text/javascript'>
-            window.location='/clurs/student-reservation.php';
+            window.location='../../student-reservation.php';
         </script>";
             } catch (Exception $e) {
                 echo "Message could not be sent. Mailer Error: {$phpmailer->ErrorInfo}";

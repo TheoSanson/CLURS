@@ -85,18 +85,18 @@
     if(mysqli_query($link,$sql)){
         if(isset($_POST['edit-account'])){
             echo "	<script type='text/javascript'>
-                window.location='/clurs/account.php';
+                window.location='../../account.php';
             </script>";
         }
         if($access > 0){
             echo "	<script type='text/javascript'>
                 console.log('$password');
-                window.location='/clurs/admin-staff.php';
+                window.location='../../admin-staff.php';
             </script>";
         }
         else{
             echo "	<script type='text/javascript'>
-                window.location='/clurs/admin-student.php';
+                window.location='../../admin-student.php';
             </script>";
         }
     }

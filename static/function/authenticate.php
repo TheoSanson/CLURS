@@ -10,7 +10,7 @@
     if($count == 0){
         echo "	<script type='text/javascript'>
                     alert('Session Expired');
-                    window.location='/clurs/static/function/logout.php';
+                    window.location='logout.php';
                 </script>";
     }
 ?>

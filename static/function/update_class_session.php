@@ -56,7 +56,7 @@
         }
 
         echo "	<script type='text/javascript'>
-           window.location='/clurs/admin-class.php?id=$lab_id';
+           window.location='../../admin-class.php?id=$lab_id';
         </script>";
     }
 	else

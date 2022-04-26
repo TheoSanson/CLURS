@@ -12,7 +12,7 @@
         }
         
         echo "	<script type='text/javascript'>
-            window.location='/clurs/admin-lab.php';
+            window.location='../../admin-lab.php';
         </script>";
     }
 	else

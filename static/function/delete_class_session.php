@@ -4,6 +4,6 @@
     $session_id = $_POST['session-id'];
     mysqli_query($link,"DELETE FROM class_session WHERE id=$session_id");
     echo "	<script type='text/javascript'>
-       window.location='/clurs/admin-class.php?id=$lab_id';
+       window.location='../../admin-class.php?id=$lab_id';
     </script>";
 ?>

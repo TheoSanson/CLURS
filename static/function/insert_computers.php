@@ -6,6 +6,6 @@
         mysqli_query($link,"INSERT INTO computer(vacancy,status,remarks,lab) VALUES('Vacant','Available','',$lab_id)");
     }
     echo "<script>
-        window.location.href = '/CLURS/admin-lab-view.php?id='+$lab_id;
+        window.location.href = '../../admin-lab-view.php?id='+$lab_id;
     </script>";
 ?>

@@ -11,13 +11,13 @@
         mysqli_query($link,"UPDATE user SET password='$new_password' WHERE id=$user_id");
         echo "<script>
             alert('Password Changed Successfully');
-            window.location.href = '/clurs/account.php';
+            window.location.href = '../../account.php';
         </script>";
     }
     else{
         echo "<script>
             alert('Current Password Input is Incorrect');
-            window.location.href = '/clurs/account.php';
+            window.location.href = '../../account.php';
         </script>";
     }
 ?>
